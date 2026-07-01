@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="EmployeeManagement.API/EmployeeManagement.API.csproj" />
+  <Project Path="EmployeeManagement.Core/EmployeeManagement.Core.csproj" />
+  <Project Path="EmployeeManagement.Infrastructure/EmployeeManagement.Infrastructure.csproj" />
+  <Project Path="EmployeeManagement.WinForms/EmployeeManagement.WinForms.csproj" />
+</Solution>
