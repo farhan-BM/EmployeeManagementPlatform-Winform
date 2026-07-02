@@ -11,6 +11,7 @@ namespace EmployeeManagement.WinForms
         private readonly EmployeeForm _employeeForm;
         private readonly IServiceProvider _serviceProvider;
         private List<EmployeeDto> _employees = [];
+        private string _currentSearchFilter = string.Empty;
 
 
         public MainForm(EmployeeService employeeService, IServiceProvider serviceProvider)
@@ -24,29 +25,34 @@ namespace EmployeeManagement.WinForms
 
         private async void MainForm_Load(object? sender, EventArgs e)
         {
+            ConfigureDataGridView();
             await LoadEmployees();
-
-
-            dgvEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvEmployees.RowHeadersVisible = false;
-            dgvEmployees.AllowUserToAddRows = false;
-            dgvEmployees.AllowUserToDeleteRows = false;
-            dgvEmployees.AllowUserToResizeRows = false;
-            dgvEmployees.ReadOnly = true;
-            dgvEmployees.MultiSelect = false;
-            dgvEmployees.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-
-            dgvEmployees.Columns["Id"].HeaderText = "ID";
-            dgvEmployees.Columns["FirstName"].HeaderText = "First Name";
-            dgvEmployees.Columns["LastName"].HeaderText = "Last Name";
-            dgvEmployees.Columns["Email"].HeaderText = "Email";
-            dgvEmployees.Columns["Salary"].HeaderText = "Salary";
-            dgvEmployees.Columns["DepartmentName"].HeaderText = "Department";
-
-            dgvEmployees.Columns["Salary"].DefaultCellStyle.Format = "N2";
-
         }
+
+        private void ConfigureDataGridView()
+        {
+            // IMPORTANT: Disable auto-generation of columns - only use designer-defined columns
+            dgvEmployees.AutoGenerateColumns = false;
+
+            // Set column header styling
+            dgvEmployees.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 102, 204);
+            dgvEmployees.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvEmployees.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 15, FontStyle.Bold);
+            dgvEmployees.ColumnHeadersHeight = 30;
+
+            // Alternate row colors for better readability
+            dgvEmployees.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
+            dgvEmployees.DefaultCellStyle.BackColor = Color.White;
+            dgvEmployees.DefaultCellStyle.Font = new Font("Arial", 15);
+
+            // Row height
+            dgvEmployees.RowTemplate.Height = 40;
+
+            // Format Salary column as currency
+            dgvEmployees.Columns["Salary"].DefaultCellStyle.Format = "C2";
+            dgvEmployees.Columns["Salary"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+        
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
@@ -137,43 +143,50 @@ namespace EmployeeManagement.WinForms
         private async Task LoadEmployees()
         {
             _employees = await _employeeService.GetEmployeesAsync() ?? new List<EmployeeDto>();
-
-            dgvEmployees.DataSource = null;
-            dgvEmployees.DataSource = _employees;
-
+            ApplyFilters();
             dgvEmployees.ClearSelection();
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            _currentSearchFilter = txtSearch.Text.Trim();
+            ApplyFilters();
+        }
+
+        private void ApplyFilters()
+        {
+            var filtered = _employees.AsEnumerable();
+
+            // Apply search filter
+            if (!string.IsNullOrWhiteSpace(_currentSearchFilter))
+            {
+                filtered = filtered.Where(e =>
+                    e.FirstName.Contains(_currentSearchFilter, StringComparison.OrdinalIgnoreCase) ||
+                    e.LastName.Contains(_currentSearchFilter, StringComparison.OrdinalIgnoreCase) ||
+                    e.Email.Contains(_currentSearchFilter, StringComparison.OrdinalIgnoreCase) ||
+                    e.DepartmentName.Contains(_currentSearchFilter, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Bind filtered data
+            dgvEmployees.DataSource = null;
+            dgvEmployees.DataSource = filtered.ToList();
+        }
 
         private int? GetSelectedEmployeeId()
         {
             if (dgvEmployees.SelectedRows.Count == 0)
                 return null;
 
-            return Convert.ToInt32(dgvEmployees.SelectedRows[0].Cells["Id"].Value);
+            return Convert.ToInt32(dgvEmployees.SelectedRows[0].Cells["ID"].Value);
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void pnlTop_Paint(object sender, PaintEventArgs e)
         {
-            var keyword = txtSearch.Text.Trim();
+        }
 
-            if (string.IsNullOrWhiteSpace(keyword))
-            {
-                dgvEmployees.DataSource = null;
-                dgvEmployees.DataSource = _employees;
-                return;
-            }
-
-            var filteredEmployees = _employees
-                .Where(e =>
-                    e.FirstName.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
-                    e.LastName.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
-                    e.Email.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
-                    e.DepartmentName.Contains(keyword, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            dgvEmployees.DataSource = null;
-            dgvEmployees.DataSource = filteredEmployees;
+        private void MainForm_Load_1(object sender, EventArgs e)
+        {
         }
     }
+
 }

@@ -38,6 +38,12 @@
             btnDelete = new Button();
             btnEdit = new Button();
             btnAdd = new Button();
+            ID = new DataGridViewTextBoxColumn();
+            First_Name = new DataGridViewTextBoxColumn();
+            Last_Name = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            Salary = new DataGridViewTextBoxColumn();
+            Department_Name = new DataGridViewTextBoxColumn();
             pnlTop.SuspendLayout();
             pnlToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvEmployees).BeginInit();
@@ -46,7 +52,7 @@
             // 
             // pnlTop
             // 
-            pnlTop.BackColor = SystemColors.Control;
+            pnlTop.BackColor = Color.White;
             pnlTop.Controls.Add(labelTitle);
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
@@ -57,10 +63,10 @@
             // labelTitle
             // 
             labelTitle.AutoSize = true;
-            labelTitle.Font = new Font("Segoe UI Emoji", 18F, FontStyle.Bold);
-            labelTitle.Location = new Point(20, 20);
+            labelTitle.Font = new Font("Impact", 24F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            labelTitle.Location = new Point(12, 9);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(379, 32);
+            labelTitle.Size = new Size(424, 39);
             labelTitle.TabIndex = 0;
             labelTitle.Text = "Employee Management System";
             labelTitle.Click += btnEdit_Click;
@@ -77,7 +83,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(90, 18);
+            txtSearch.Location = new Point(99, 18);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(300, 23);
             txtSearch.TabIndex = 2;
@@ -86,19 +92,25 @@
             // lblSearch
             // 
             lblSearch.AutoSize = true;
-            lblSearch.Location = new Point(20, 20);
+            lblSearch.Font = new Font("Cambria", 14.25F, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            lblSearch.Location = new Point(15, 18);
             lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(42, 15);
+            lblSearch.Size = new Size(69, 22);
             lblSearch.TabIndex = 0;
             lblSearch.Text = "Search";
             // 
             // dgvEmployees
             // 
+            dgvEmployees.AllowDrop = true;
             dgvEmployees.AllowUserToAddRows = false;
             dgvEmployees.AllowUserToDeleteRows = false;
+            dgvEmployees.AllowUserToOrderColumns = true;
             dgvEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvEmployees.BackgroundColor = Color.FromArgb(224, 224, 224);
             dgvEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEmployees.Columns.AddRange(new DataGridViewColumn[] { ID, First_Name, Last_Name, Email, Salary, Department_Name });
             dgvEmployees.Dock = DockStyle.Fill;
+            dgvEmployees.EditMode = DataGridViewEditMode.EditOnF2;
             dgvEmployees.Location = new Point(0, 130);
             dgvEmployees.MultiSelect = false;
             dgvEmployees.Name = "dgvEmployees";
@@ -125,41 +137,96 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(292, 19);
+            btnDelete.BackColor = Color.Red;
+            btnDelete.Font = new Font("Consolas", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDelete.Location = new Point(348, 19);
             btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(107, 22);
+            btnDelete.Size = new Size(149, 64);
             btnDelete.TabIndex = 2;
-            btnDelete.Text = "Delete_Employee";
-            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(168, 19);
+            btnEdit.BackColor = Color.Yellow;
+            btnEdit.Font = new Font("Consolas", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEdit.Location = new Point(181, 19);
             btnEdit.Margin = new Padding(3, 2, 3, 2);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(104, 22);
+            btnEdit.Size = new Size(152, 64);
             btnEdit.TabIndex = 1;
-            btnEdit.Text = "Edit_Employee";
-            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Text = "Edit";
+            btnEdit.UseVisualStyleBackColor = false;
             btnEdit.Click += btnEdit_Click;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(42, 19);
+            btnAdd.BackColor = Color.Green;
+            btnAdd.Font = new Font("Consolas", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAdd.Location = new Point(12, 19);
             btnAdd.Margin = new Padding(3, 2, 3, 2);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(106, 22);
+            btnAdd.Size = new Size(152, 64);
             btnAdd.TabIndex = 0;
-            btnAdd.Text = "Add_Employee";
-            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Text = "Add";
+            btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
+            // 
+            // ID
+            // 
+            ID.DataPropertyName = "Id";
+            ID.FillWeight = 20F;
+            ID.HeaderText = "ID";
+            ID.Name = "ID";
+            ID.ReadOnly = true;
+            // 
+            // First_Name
+            // 
+            First_Name.DataPropertyName = "FirstName";
+            First_Name.FillWeight = 100F;
+            First_Name.HeaderText = "First Name";
+            First_Name.Name = "First_Name";
+            First_Name.ReadOnly = true;
+            // 
+            // Last_Name
+            // 
+            Last_Name.DataPropertyName = "LastName";
+            Last_Name.FillWeight = 100F;
+            Last_Name.HeaderText = "Last Name";
+            Last_Name.Name = "Last_Name";
+            Last_Name.ReadOnly = true;
+            // 
+            // Email
+            // 
+            Email.DataPropertyName = "Email";
+            Email.FillWeight = 140F;
+            Email.HeaderText = "Email";
+            Email.Name = "Email";
+            Email.ReadOnly = true;
+            // 
+            // Salary
+            // 
+            Salary.DataPropertyName = "Salary";
+            Salary.FillWeight = 80F;
+            Salary.HeaderText = "Salary";
+            Salary.Name = "Salary";
+            Salary.ReadOnly = true;
+            // 
+            // Department_Name
+            // 
+            Department_Name.DataPropertyName = "DepartmentName";
+            Department_Name.FillWeight = 100F;
+            Department_Name.HeaderText = "Department";
+            Department_Name.Name = "Department_Name";
+            Department_Name.ReadOnly = true;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(1408, 706);
             Controls.Add(dgvEmployees);
             Controls.Add(pnlBottom);
@@ -192,5 +259,11 @@
         private Button btnDelete;
         private Button btnEdit;
         private Button btnAdd;
+        private DataGridViewTextBoxColumn ID;
+        private DataGridViewTextBoxColumn First_Name;
+        private DataGridViewTextBoxColumn Last_Name;
+        private DataGridViewTextBoxColumn Email;
+        private DataGridViewTextBoxColumn Salary;
+        private DataGridViewTextBoxColumn Department_Name;
     }
 }

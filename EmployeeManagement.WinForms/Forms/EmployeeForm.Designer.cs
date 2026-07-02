@@ -48,7 +48,8 @@
             // 
             lblFirstName.AutoSize = true;
             lblFirstName.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFirstName.Location = new Point(3, 0);
+            lblFirstName.Location = new Point(5, 0);
+            lblFirstName.Margin = new Padding(5, 0, 5, 0);
             lblFirstName.Name = "lblFirstName";
             lblFirstName.Size = new Size(137, 32);
             lblFirstName.TabIndex = 0;
@@ -56,23 +57,26 @@
             // 
             // txtFirstName
             // 
-            txtFirstName.Location = new Point(395, 3);
+            txtFirstName.Location = new Point(678, 6);
+            txtFirstName.Margin = new Padding(5, 6, 5, 6);
             txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new Size(265, 23);
+            txtFirstName.Size = new Size(451, 35);
             txtFirstName.TabIndex = 1;
             // 
             // txtLastName
             // 
-            txtLastName.Location = new Point(395, 74);
+            txtLastName.Location = new Point(678, 148);
+            txtLastName.Margin = new Padding(5, 6, 5, 6);
             txtLastName.Name = "txtLastName";
-            txtLastName.Size = new Size(265, 23);
+            txtLastName.Size = new Size(451, 35);
             txtLastName.TabIndex = 3;
             // 
             // lblLastName
             // 
             lblLastName.AutoSize = true;
             lblLastName.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblLastName.Location = new Point(3, 71);
+            lblLastName.Location = new Point(5, 142);
+            lblLastName.Margin = new Padding(5, 0, 5, 0);
             lblLastName.Name = "lblLastName";
             lblLastName.Size = new Size(133, 32);
             lblLastName.TabIndex = 2;
@@ -80,16 +84,18 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(395, 152);
+            txtEmail.Location = new Point(678, 305);
+            txtEmail.Margin = new Padding(5, 6, 5, 6);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(265, 23);
+            txtEmail.Size = new Size(451, 35);
             txtEmail.TabIndex = 5;
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
             lblEmail.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(3, 149);
+            lblEmail.Location = new Point(5, 299);
+            lblEmail.Margin = new Padding(5, 0, 5, 0);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(76, 32);
             lblEmail.TabIndex = 4;
@@ -97,16 +103,18 @@
             // 
             // txtSalary
             // 
-            txtSalary.Location = new Point(395, 225);
+            txtSalary.Location = new Point(678, 451);
+            txtSalary.Margin = new Padding(5, 6, 5, 6);
             txtSalary.Name = "txtSalary";
-            txtSalary.Size = new Size(265, 23);
+            txtSalary.Size = new Size(451, 35);
             txtSalary.TabIndex = 7;
             // 
             // lblSalary
             // 
             lblSalary.AutoSize = true;
             lblSalary.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSalary.Location = new Point(3, 222);
+            lblSalary.Location = new Point(5, 445);
+            lblSalary.Margin = new Padding(5, 0, 5, 0);
             lblSalary.Name = "lblSalary";
             lblSalary.Size = new Size(84, 32);
             lblSalary.TabIndex = 6;
@@ -116,7 +124,8 @@
             // 
             lblDepartment.AutoSize = true;
             lblDepartment.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDepartment.Location = new Point(3, 300);
+            lblDepartment.Location = new Point(5, 601);
+            lblDepartment.Margin = new Padding(5, 0, 5, 0);
             lblDepartment.Name = "lblDepartment";
             lblDepartment.Size = new Size(152, 32);
             lblDepartment.TabIndex = 8;
@@ -126,16 +135,19 @@
             // 
             cmbDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbDepartment.FormattingEnabled = true;
-            cmbDepartment.Location = new Point(395, 303);
+            cmbDepartment.Location = new Point(678, 607);
+            cmbDepartment.Margin = new Padding(5, 6, 5, 6);
             cmbDepartment.Name = "cmbDepartment";
-            cmbDepartment.Size = new Size(265, 23);
+            cmbDepartment.Size = new Size(451, 38);
             cmbDepartment.TabIndex = 9;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(12, 384);
+            btnSave.ForeColor = Color.Green;
+            btnSave.Location = new Point(21, 768);
+            btnSave.Margin = new Padding(5, 6, 5, 6);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(100, 30);
+            btnSave.Size = new Size(171, 60);
             btnSave.TabIndex = 10;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
@@ -143,9 +155,11 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(136, 384);
+            btnCancel.ForeColor = Color.Red;
+            btnCancel.Location = new Point(233, 768);
+            btnCancel.Margin = new Padding(5, 6, 5, 6);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(100, 30);
+            btnCancel.Size = new Size(171, 60);
             btnCancel.TabIndex = 11;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -165,28 +179,31 @@
             formLayout.Controls.Add(txtSalary, 1, 3);
             formLayout.Controls.Add(lblLastName, 0, 1);
             formLayout.Controls.Add(cmbDepartment, 1, 4);
-            formLayout.Location = new Point(3, 4);
+            formLayout.Location = new Point(5, 8);
+            formLayout.Margin = new Padding(5, 6, 5, 6);
             formLayout.Name = "formLayout";
             formLayout.RowCount = 5;
             formLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 47.65101F));
             formLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 52.34899F));
-            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 73F));
-            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 78F));
-            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 73F));
-            formLayout.Size = new Size(785, 374);
+            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 146F));
+            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 156F));
+            formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 146F));
+            formLayout.Size = new Size(1346, 748);
             formLayout.TabIndex = 12;
             // 
             // EmployeeForm
             // 
             AcceptButton = btnSave;
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1371, 900);
             Controls.Add(btnCancel);
             Controls.Add(btnSave);
             Controls.Add(formLayout);
+            Font = new Font("Segoe UI", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(5, 6, 5, 6);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "EmployeeForm";
