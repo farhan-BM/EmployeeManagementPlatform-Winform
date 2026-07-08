@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmployeeManagement.Core\EmployeeManagement.Core.csproj" />
+    <ProjectReference Include="..\EmployeeManagement.WPF\EmployeeManagement.WPF.csproj" />
   </ItemGroup>
 
   <ItemGroup>

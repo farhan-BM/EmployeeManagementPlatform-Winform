@@ -2,6 +2,7 @@ using EmployeeManagement.Core.DTOs.Employee;
 using EmployeeManagement.WinForms.Forms;
 using EmployeeManagement.WinForms.Services;
 using Microsoft.Extensions.DependencyInjection;
+using EmployeeManagement.WPF.Views.Windows;
 
 namespace EmployeeManagement.WinForms
 {
@@ -48,17 +49,15 @@ namespace EmployeeManagement.WinForms
             // Row height
             dgvEmployees.RowTemplate.Height = 40;
 
-            // Format Salary column as currency
-            dgvEmployees.Columns["Salary"].DefaultCellStyle.Format = "C2";
-            dgvEmployees.Columns["Salary"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
         }
-        
+
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
-            var employeeId = GetSelectedEmployeeId();
+            var employee = GetSelectedEmployee();
 
-            if (employeeId == null)
+            if (employee == null)
             {
                 MessageBox.Show("Please select an employee.");
                 return;
@@ -66,7 +65,7 @@ namespace EmployeeManagement.WinForms
 
             using var employeeForm = _serviceProvider.GetRequiredService<EmployeeForm>();
 
-            employeeForm.EmployeeId = employeeId;
+            employeeForm.EmployeeId = employee.Id;
 
             if (employeeForm.ShowDialog() == DialogResult.OK)
             {
@@ -86,9 +85,9 @@ namespace EmployeeManagement.WinForms
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            var employeeId = GetSelectedEmployeeId();
+            var employee = GetSelectedEmployee();
 
-            if (employeeId == null)
+            if (employee == null)
             {
                 MessageBox.Show(
                     "Please select an employee.",
@@ -108,7 +107,7 @@ namespace EmployeeManagement.WinForms
             if (result != DialogResult.Yes)
                 return;
 
-            var success = await _employeeService.DeleteEmployeeAsync(employeeId.Value);
+            var success = await _employeeService.DeleteEmployeeAsync(employee.Id);
 
             if (success)
             {
@@ -172,20 +171,49 @@ namespace EmployeeManagement.WinForms
             dgvEmployees.DataSource = filtered.ToList();
         }
 
-        private int? GetSelectedEmployeeId()
+        private EmployeeDto? GetSelectedEmployee()
         {
             if (dgvEmployees.SelectedRows.Count == 0)
                 return null;
 
-            return Convert.ToInt32(dgvEmployees.SelectedRows[0].Cells["ID"].Value);
+            return dgvEmployees.SelectedRows[0].DataBoundItem as EmployeeDto;
         }
 
-        private void pnlTop_Paint(object sender, PaintEventArgs e)
+        private void btnViewDetails_click(object sender, EventArgs e)
         {
+            var employee = GetSelectedEmployee();
+
+            if (employee == null)
+            {
+                MessageBox.Show(
+                    "Please select an employee.",
+                    "View Details",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            Hide();
+
+            var window = new EmployeeDetailsWindow(employee);
+
+            window.WindowState = System.Windows.WindowState.Maximized;
+
+            window.ShowDialog();
+
+            Show();
+
+            Activate();
         }
 
         private void MainForm_Load_1(object sender, EventArgs e)
         {
+        }
+
+        private void pnlTop_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

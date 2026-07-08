@@ -7,4 +7,5 @@
   <Project Path="EmployeeManagement.Core/EmployeeManagement.Core.csproj" />
   <Project Path="EmployeeManagement.Infrastructure/EmployeeManagement.Infrastructure.csproj" />
   <Project Path="EmployeeManagement.WinForms/EmployeeManagement.WinForms.csproj" />
+  <Project Path="EmployeeManagement.WPF/EmployeeManagement.WPF.csproj" Id="aaa7f2f8-0896-4af5-b3a1-9bcd52a68e3d" />
 </Solution>

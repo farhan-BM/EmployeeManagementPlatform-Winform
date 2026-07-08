@@ -1,0 +1,204 @@
+﻿<Window x:Class="EmployeeManagement.WPF.Views.Windows.EmployeeDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Employee Details"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        Background="#EEF2F7">
+
+    <Window.Resources>
+
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#2563EB"/>
+            <Setter Property="BorderBrush" Value="#2563EB"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="8,0"/>
+        </Style>
+
+        <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Background" Value="#DC2626"/>
+            <Setter Property="BorderBrush" Value="#DC2626"/>
+        </Style>
+
+        <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Background" Value="#6B7280"/>
+            <Setter Property="BorderBrush" Value="#6B7280"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#374151"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,0,0,18"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Margin" Value="0,0,0,18"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Margin="25">
+
+        <Border Background="White" CornerRadius="16">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="170"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header -->
+                <Border Grid.Row="0" Background="#2563EB" CornerRadius="16,16,0,0">
+                    <Grid Margin="20,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Employee Details"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   VerticalAlignment="Center"/>
+
+                        <Button Grid.Column="1"
+                                Width="42"
+                                Height="42"
+                                Content="✕"
+                                Command="{Binding CancelCommand}"/>
+                    </Grid>
+                </Border>
+
+                <!-- Profile -->
+                <Grid Grid.Row="1" Margin="35,15">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Width="120"
+                            Height="120"
+                            CornerRadius="60"
+                            Background="#DBEAFE"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+
+                        <TextBlock Text="👤"
+                                   FontSize="58"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+
+                    <StackPanel Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Margin="20,0">
+
+                        <TextBlock Text="{Binding FullName}"
+                                   FontSize="30"
+                                   FontWeight="Bold"/>
+
+                        <TextBlock Text="{Binding Department}"
+                                   Margin="0,8,0,0"
+                                   FontSize="18"
+                                   Foreground="Gray"/>
+
+                        <TextBlock Text="{Binding EmployeeId,StringFormat=Employee #{0}}"
+                                   Margin="0,8,0,0"
+                                   FontWeight="SemiBold"
+                                   Foreground="#2563EB"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- Landscape Form -->
+                <Border Grid.Row="2"
+                        Margin="35"
+                        BorderThickness="1"
+                        BorderBrush="#E5E7EB"
+                        CornerRadius="12"
+                        Padding="25">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- LEFT -->
+
+                        <StackPanel>
+
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="First Name"/>
+                            <TextBox Text="{Binding FirstName}"/>
+
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="Email"/>
+                            <TextBox Text="{Binding Email}"/>
+
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="Salary"/>
+                            <TextBox Text="{Binding Salary}"/>
+
+                        </StackPanel>
+
+                        <!-- RIGHT -->
+
+                        <StackPanel Grid.Column="2">
+
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="Last Name"/>
+                            <TextBox Text="{Binding LastName}"/>
+
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="Department"/>
+                            <ComboBox SelectedItem="{Binding Department}"/>
+
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="Employee ID"/>
+                            <TextBox Text="{Binding EmployeeId}" IsReadOnly="True"/>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- Footer -->
+                <StackPanel Grid.Row="3"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,30,20">
+
+                    <Button Content="Delete Employee"
+                            Style="{StaticResource DangerButton}"/>
+
+                    <Button Content="Cancel"
+                            Style="{StaticResource SecondaryButton}"
+                            Command="{Binding CancelCommand}"/>
+
+                    <Button Content="Save Changes"
+                            Width="170"
+                            Style="{StaticResource PrimaryButton}"/>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</Window>

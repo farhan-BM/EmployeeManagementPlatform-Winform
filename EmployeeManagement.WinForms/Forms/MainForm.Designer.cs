@@ -35,14 +35,12 @@
             lblSearch = new Label();
             dgvEmployees = new DataGridView();
             pnlBottom = new Panel();
+            btnViewDetails = new Button();
             btnDelete = new Button();
             btnEdit = new Button();
             btnAdd = new Button();
-            ID = new DataGridViewTextBoxColumn();
             First_Name = new DataGridViewTextBoxColumn();
             Last_Name = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
-            Salary = new DataGridViewTextBoxColumn();
             Department_Name = new DataGridViewTextBoxColumn();
             pnlTop.SuspendLayout();
             pnlToolbar.SuspendLayout();
@@ -59,6 +57,7 @@
             pnlTop.Name = "pnlTop";
             pnlTop.Size = new Size(1408, 70);
             pnlTop.TabIndex = 0;
+            pnlTop.Paint += pnlTop_Paint_1;
             // 
             // labelTitle
             // 
@@ -108,7 +107,7 @@
             dgvEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvEmployees.BackgroundColor = Color.FromArgb(224, 224, 224);
             dgvEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmployees.Columns.AddRange(new DataGridViewColumn[] { ID, First_Name, Last_Name, Email, Salary, Department_Name });
+            dgvEmployees.Columns.AddRange(new DataGridViewColumn[] { First_Name, Last_Name, Department_Name });
             dgvEmployees.Dock = DockStyle.Fill;
             dgvEmployees.EditMode = DataGridViewEditMode.EditOnF2;
             dgvEmployees.Location = new Point(0, 130);
@@ -124,6 +123,7 @@
             // 
             // pnlBottom
             // 
+            pnlBottom.Controls.Add(btnViewDetails);
             pnlBottom.Controls.Add(btnDelete);
             pnlBottom.Controls.Add(btnEdit);
             pnlBottom.Controls.Add(btnAdd);
@@ -134,6 +134,18 @@
             pnlBottom.Size = new Size(1408, 94);
             pnlBottom.TabIndex = 3;
             pnlBottom.Paint += panel1_Paint;
+            // 
+            // btnViewDetails
+            // 
+            btnViewDetails.BackColor = Color.DarkOrange;
+            btnViewDetails.Font = new Font("Consolas", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnViewDetails.Location = new Point(514, 20);
+            btnViewDetails.Name = "btnViewDetails";
+            btnViewDetails.Size = new Size(140, 63);
+            btnViewDetails.TabIndex = 3;
+            btnViewDetails.Text = "View Details";
+            btnViewDetails.UseVisualStyleBackColor = false;
+            btnViewDetails.Click += btnViewDetails_click;
             // 
             // btnDelete
             // 
@@ -174,18 +186,9 @@
             btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
-            // ID
-            // 
-            ID.DataPropertyName = "Id";
-            ID.FillWeight = 20F;
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            // 
             // First_Name
             // 
             First_Name.DataPropertyName = "FirstName";
-            First_Name.FillWeight = 100F;
             First_Name.HeaderText = "First Name";
             First_Name.Name = "First_Name";
             First_Name.ReadOnly = true;
@@ -193,31 +196,13 @@
             // Last_Name
             // 
             Last_Name.DataPropertyName = "LastName";
-            Last_Name.FillWeight = 100F;
             Last_Name.HeaderText = "Last Name";
             Last_Name.Name = "Last_Name";
             Last_Name.ReadOnly = true;
             // 
-            // Email
-            // 
-            Email.DataPropertyName = "Email";
-            Email.FillWeight = 140F;
-            Email.HeaderText = "Email";
-            Email.Name = "Email";
-            Email.ReadOnly = true;
-            // 
-            // Salary
-            // 
-            Salary.DataPropertyName = "Salary";
-            Salary.FillWeight = 80F;
-            Salary.HeaderText = "Salary";
-            Salary.Name = "Salary";
-            Salary.ReadOnly = true;
-            // 
             // Department_Name
             // 
             Department_Name.DataPropertyName = "DepartmentName";
-            Department_Name.FillWeight = 100F;
             Department_Name.HeaderText = "Department";
             Department_Name.Name = "Department_Name";
             Department_Name.ReadOnly = true;
@@ -259,11 +244,9 @@
         private Button btnDelete;
         private Button btnEdit;
         private Button btnAdd;
-        private DataGridViewTextBoxColumn ID;
+        private Button btnViewDetails;
         private DataGridViewTextBoxColumn First_Name;
         private DataGridViewTextBoxColumn Last_Name;
-        private DataGridViewTextBoxColumn Email;
-        private DataGridViewTextBoxColumn Salary;
         private DataGridViewTextBoxColumn Department_Name;
     }
 }
