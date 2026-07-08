@@ -361,3 +361,18 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# graphify knowledge graph outputs
+graphify-out/
+.graphify_python
+
+# opencode / graphify integration files
+AGENTS.md
+CLAUDE.md
+
+# Agent / IDE config directories
+.agents/
+.claude/
+.github/
+.opencode/
+.vscode/
