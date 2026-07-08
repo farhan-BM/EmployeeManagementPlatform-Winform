@@ -34,6 +34,16 @@ internal static class Program
             client.BaseAddress = new Uri(baseUrl);
         });
 
+        builder.Services.AddHttpClient("WpfDepartmentService", client =>
+        {
+            client.BaseAddress = new Uri(baseUrl);
+        }).AddTypedClient<EmployeeManagement.WPF.Services.DepartmentService>();
+
+        builder.Services.AddHttpClient("WpfEmployeeService", client =>
+        {
+            client.BaseAddress = new Uri(baseUrl);
+        }).AddTypedClient<EmployeeManagement.WPF.Services.EmployeeService>();
+
         builder.Services.AddTransient<MainForm>();
         builder.Services.AddTransient<EmployeeForm>();
 

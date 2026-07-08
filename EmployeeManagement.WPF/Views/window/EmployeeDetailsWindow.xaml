@@ -1,4 +1,4 @@
-﻿<Window x:Class="EmployeeManagement.WPF.Views.Windows.EmployeeDetailsWindow"
+<Window x:Class="EmployeeManagement.WPF.Views.Windows.EmployeeDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Employee Details"
@@ -165,7 +165,10 @@
                             <TextBox Text="{Binding LastName}"/>
 
                             <TextBlock Style="{StaticResource LabelStyle}" Text="Department"/>
-                            <ComboBox SelectedItem="{Binding Department}"/>
+                            <ComboBox ItemsSource="{Binding Departments}"
+                                      SelectedValue="{Binding DepartmentId}"
+                                      DisplayMemberPath="Name"
+                                      SelectedValuePath="Id"/>
 
                             <TextBlock Style="{StaticResource LabelStyle}" Text="Employee ID"/>
                             <TextBox Text="{Binding EmployeeId}" IsReadOnly="True"/>
@@ -183,7 +186,8 @@
                             Margin="0,0,30,20">
 
                     <Button Content="Delete Employee"
-                            Style="{StaticResource DangerButton}"/>
+                            Style="{StaticResource DangerButton}"
+                            Command="{Binding DeleteCommand}"/>
 
                     <Button Content="Cancel"
                             Style="{StaticResource SecondaryButton}"
@@ -191,7 +195,8 @@
 
                     <Button Content="Save Changes"
                             Width="170"
-                            Style="{StaticResource PrimaryButton}"/>
+                            Style="{StaticResource PrimaryButton}"
+                            Command="{Binding SaveCommand}"/>
 
                 </StackPanel>
 

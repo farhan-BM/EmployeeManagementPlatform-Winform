@@ -179,7 +179,7 @@ namespace EmployeeManagement.WinForms
             return dgvEmployees.SelectedRows[0].DataBoundItem as EmployeeDto;
         }
 
-        private void btnViewDetails_click(object sender, EventArgs e)
+        private async void btnViewDetails_click(object sender, EventArgs e)
         {
             var employee = GetSelectedEmployee();
 
@@ -196,15 +196,22 @@ namespace EmployeeManagement.WinForms
 
             Hide();
 
-            var window = new EmployeeDetailsWindow(employee);
+            var wpfDeptService = _serviceProvider.GetRequiredService<EmployeeManagement.WPF.Services.DepartmentService>();
+            var wpfEmpService = _serviceProvider.GetRequiredService<EmployeeManagement.WPF.Services.EmployeeService>();
+            var window = new EmployeeDetailsWindow(employee, wpfDeptService, wpfEmpService);
 
             window.WindowState = System.Windows.WindowState.Maximized;
 
-            window.ShowDialog();
+            var dialogResult = window.ShowDialog();
 
             Show();
 
             Activate();
+
+            if (dialogResult == true)
+            {
+                await LoadEmployees();
+            }
         }
 
         private void MainForm_Load_1(object sender, EventArgs e)
